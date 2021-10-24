@@ -10,7 +10,7 @@ const SocialMediaWrapper = styled.div`
 	padding-left: 30px;
 	text-align: center;
 	display: flex;
-	@media only screen and (min-width: 900px) {
+	@media only screen and (min-width: 1300px) {
 		flex-direction: column;
 	}
 `

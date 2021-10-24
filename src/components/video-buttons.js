@@ -1,42 +1,102 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import Switch from '../images/switch.png'
+import Buttons from './buttons';
+import { useMediaQuery } from 'react-responsive'
 
 const IframeWrapper = styled.div`
 	flex: 2;
 `
 
 const YoutubeWrapper = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100vh;
+
 `
 
 const YoutubeOverlay = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	vertical-align: middle;
-	height: 100%;
-	width: 100%;
+
 `
 
-const VideoButtons = ({ selectedVideos }) => {
+const rotate = keyframes`
+  0% {
+	transform: rotate(0);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+`;
+
+const StyledSwitch = styled.img`
+	animation: 1s ease-out 0s 1 ${rotate};
+	animation-fill-mode: forwards;
+	justify-content: center;
+	margin-left: 26px;
+	margin-bottom: 10px;
+`
+
+const ButtonSwitchWrapper = styled.div`
+	display: flex; 
+	flex-direction: column;
+	margin-left: 18px;
+`
+
+const Wrapper = styled.div`
+	position: absolute;
+    top: 265.5px;
+	display: flex;
+	@media only screen and (max-width: 750px) {
+		left: calc(50% - 212px);
+	}
+	@media only screen and (min-width: 750px) {
+		left: calc(50% - 326px);
+	}
+	@media only screen and (min-width: 1150px) {
+		left: calc(50% - 540px);
+	}
+	@media only screen and (max-width: 1150px) {
+		top: 262.5px;
+	}
+	@media only screen and (min-width: 1300px) {
+		left: calc(50% - 593.5px);
+	}
+`
+
+const appear = keyframes`
+   from {opacity: 0;}
+   to {
+   	opacity: 1;
+   	box-shadow: 0 0 8px 4px lightgrey;
+   }
+`;
+
+const OnCircle = styled.div`
+	animation: 1.5s ease-out 0s 1 ${appear};
+	animation-fill-mode: forwards;
+	border-radius: 50%;
+	width: 12px;
+    height: 12px;
+    background-color: #66FF00;
+    align-self: end;
+    margin-bottom: 18px;
+    margin-right: 21px;
+    margin-top: 6px;
+`
+
+const VideoButtons = ({ videoType, selectedVideo, setVideoType }) => {
+	const isMobile = useMediaQuery({
+		query: '(max-width: 750px)',
+	})
 	return (
-		<YoutubeWrapper>
-			<YoutubeOverlay>
-				<IframeWrapper>
-					<iframe
-						title='youtube'
-						width='450px'
-						height='250px'
-						src={selectedVideos}
-						frameBorder='0'
-						allowFullScreen
-					/>
-				</IframeWrapper>
-				<div />
-				<div />
-			</YoutubeOverlay>
-		</YoutubeWrapper>
+		<Wrapper>
+			<iframe id="ytplayer" type="text/html"
+					width={isMobile ? '420' : '480'}
+					height={isMobile ? '400' : '300'}
+					src={selectedVideo}
+					frameBorder="0"></iframe>
+			{!isMobile && <ButtonSwitchWrapper>
+				<OnCircle />
+				<StyledSwitch src={Switch} width='90px'/>
+				<Buttons setVideoType={setVideoType} videoType={videoType} />
+			</ButtonSwitchWrapper>}
+		</Wrapper>
 	)
 }
 

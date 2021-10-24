@@ -1,46 +1,46 @@
 import { useState } from 'react'
 import GlobalStyle from './theme/global-styles'
-import EmilyTv from './components/Group-2'
-import EmilyTv2 from './components/Group-3'
+import BigScreenTv from './images/big-screen-tv.png'
+import SmallScreenTv from './images/small-screen-tv.png';
+import MobileScreenTv from './images/mobile-screen-tv.png'
 import VideoButtons from './components/video-buttons'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import SocialMedia from './components/social-media'
 
-const DesktopTv = styled(EmilyTv)``
-
-const SmallerTv = styled(EmilyTv2)``
 
 const ImageWrapper = styled.div`
-	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	vertical-align: middle;
 	padding: 10px;
-	@media only screen and (max-width: 900px) {
+	@media only screen and (max-width: 1150px) {
 		padding: 0 20px;
 		flex-direction: column;
 	}
 `
-const YoutubeWrapper = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100vh;
-`
 
-const YoutubeOverlay = styled.div`
+const TvSocialMediaWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	vertical-align: middle;
-	height: 100%;
-	width: 100%;
+	padding-top: 50px;
+	@media only screen and (max-width: 1300px) {
+		flex-direction: column;
+	}
+`
+
+const VideoButtonsWrapper = styled.div`
+	display: flex;
 `
 
 const Home = () => {
 	const isDesktopOrLaptop = useMediaQuery({
-		query: '(min-width: 900px)',
+		query: '(min-width: 1150px)',
+	})
+	const isMobile = useMediaQuery({
+		query: '(max-width: 750px)',
 	})
 	const [videoType, setVideoType] = useState('loveIsBlind')
 	const getYoutubeVideo = () => {
@@ -60,19 +60,20 @@ const Home = () => {
 		}
 		return video
 	}
-	console.log(videoType)
-	const selectedVideos = getYoutubeVideo()
+	const selectedVideo = getYoutubeVideo()
 	return (
 		<div>
-			<VideoButtons selectedVideos={selectedVideos} />
-			<ImageWrapper>
-				{isDesktopOrLaptop ? (
-					<DesktopTv setVideoType={setVideoType} />
-				) : (
-					<SmallerTv setVideoType={setVideoType} />
-				)}
+			<TvSocialMediaWrapper>
+				<div>
+					<VideoButtonsWrapper>
+						<VideoButtons selectedVideo={selectedVideo} videoType={videoType} setVideoType={setVideoType} />
+					</VideoButtonsWrapper>
+					<ImageWrapper>
+						<img src={isDesktopOrLaptop ? BigScreenTv : isMobile ? MobileScreenTv : SmallScreenTv} />
+					</ImageWrapper>
+				</div>
 				<SocialMedia />
-			</ImageWrapper>
+			</TvSocialMediaWrapper>
 			<GlobalStyle />
 		</div>
 	)
