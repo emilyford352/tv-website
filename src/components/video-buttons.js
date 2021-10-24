@@ -28,14 +28,25 @@ const StyledSwitch = styled.img`
 	animation: 1s ease-out 0s 1 ${rotate};
 	animation-fill-mode: forwards;
 	justify-content: center;
-	margin-left: 26px;
-	margin-bottom: 10px;
+	@media only screen and (min-width: 750px) {
+		margin-left: 26px;
+		margin-bottom: 10px;
+	}
+	@media only screen and (max-width: 750px) {
+		display: flex;
+		justify-content: center;
+	}
 `
 
 const ButtonSwitchWrapper = styled.div`
 	display: flex; 
 	flex-direction: column;
-	margin-left: 18px;
+	@media only screen and (min-width: 750px) {
+		margin-left: 18px;
+	}
+	@media only screen and (max-width: 750px) {
+		left: calc(50% - 152px);
+	}
 `
 
 const Wrapper = styled.div`
@@ -43,7 +54,8 @@ const Wrapper = styled.div`
     top: 265.5px;
 	display: flex;
 	@media only screen and (max-width: 750px) {
-		left: calc(50% - 212px);
+		left: calc(50% - 152px);
+			flex-direction: column;
 	}
 	@media only screen and (min-width: 750px) {
 		left: calc(50% - 326px);
@@ -87,15 +99,15 @@ const VideoButtons = ({ videoType, selectedVideo, setVideoType }) => {
 	return (
 		<Wrapper>
 			<iframe id="ytplayer" type="text/html"
-					width={isMobile ? '420' : '480'}
-					height={isMobile ? '400' : '300'}
+					width={isMobile ? '300' : '480'}
+					height={isMobile ? '240' : '300'}
 					src={selectedVideo}
 					frameBorder="0"></iframe>
-			{!isMobile && <ButtonSwitchWrapper>
+			<ButtonSwitchWrapper>
 				<OnCircle />
-				<StyledSwitch src={Switch} width='90px'/>
+				<StyledSwitch src={Switch} width={isMobile ? '50px' : '90px'}/>
 				<Buttons setVideoType={setVideoType} videoType={videoType} />
-			</ButtonSwitchWrapper>}
+			</ButtonSwitchWrapper>
 		</Wrapper>
 	)
 }

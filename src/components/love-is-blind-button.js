@@ -11,12 +11,9 @@ const StyledSvg = styled.svg`
             fill: lightgrey;
        }
     }
-    // .top-button {
-    //     fill: ${(props) => props.videoType === 'loveIsBlind' && 'white'};
-    // }
-    // .lower-button {
-    //     fill: ${(props) => props.videoType === 'loveIsBlind' && 'lightgray'};
-    // }
+    .top-button {
+        filter: ${(props) => props.videoType === 'loveIsBlind' && 'drop-shadow(0 0 0 white)'};
+    }
 `;
 
 const LoveIsBlindButton = ({setVideoType, videoType}) => {
