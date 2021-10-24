@@ -25,9 +25,14 @@ const TvSocialMediaWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-top: 50px;
 	@media only screen and (max-width: 1300px) {
 		flex-direction: column;
+	}
+	@media only screen and (max-width: 750px) {
+		padding-top: 10px;
+	}
+	@media only screen and (min-width: 750px) {
+		padding-top: 50px;
 	}
 `
 

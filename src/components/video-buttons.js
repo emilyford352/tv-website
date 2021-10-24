@@ -35,6 +35,8 @@ const StyledSwitch = styled.img`
 	@media only screen and (max-width: 750px) {
 		display: flex;
 		justify-content: center;
+		align-self: center;
+		margin-top: -30px
 	}
 `
 
@@ -45,26 +47,24 @@ const ButtonSwitchWrapper = styled.div`
 		margin-left: 18px;
 	}
 	@media only screen and (max-width: 750px) {
-		left: calc(50% - 152px);
+		margin-top: 15.5px;
 	}
 `
 
 const Wrapper = styled.div`
 	position: absolute;
-    top: 265.5px;
 	display: flex;
 	@media only screen and (max-width: 750px) {
 		left: calc(50% - 152px);
-			flex-direction: column;
+		flex-direction: column;
+		top: 214.5px;
 	}
 	@media only screen and (min-width: 750px) {
 		left: calc(50% - 326px);
+		top: 265.5px;
 	}
 	@media only screen and (min-width: 1150px) {
 		left: calc(50% - 540px);
-	}
-	@media only screen and (max-width: 1150px) {
-		top: 262.5px;
 	}
 	@media only screen and (min-width: 1300px) {
 		left: calc(50% - 593.5px);
@@ -86,10 +86,21 @@ const OnCircle = styled.div`
 	width: 12px;
     height: 12px;
     background-color: #66FF00;
-    align-self: end;
+    align-self: flex-end;
     margin-bottom: 18px;
-    margin-right: 21px;
     margin-top: 6px;
+    margin-right: 21px;
+    @media only screen and (min-width: 750px) and (max-width: 1150px) {
+        margin-top: 3px;
+    }
+    @media only screen and (max-width: 750px) {
+    	margin-right: 12.5px;
+    }
+`
+
+const StyledIframe = styled.iframe`
+    border-radius: 15px;
+    overflow: hidden;
 `
 
 const VideoButtons = ({ videoType, selectedVideo, setVideoType }) => {
@@ -98,11 +109,11 @@ const VideoButtons = ({ videoType, selectedVideo, setVideoType }) => {
 	})
 	return (
 		<Wrapper>
-			<iframe id="ytplayer" type="text/html"
+			<StyledIframe id="ytplayer" type="text/html"
 					width={isMobile ? '300' : '480'}
-					height={isMobile ? '240' : '300'}
+					height={isMobile ? '250' : '300'}
 					src={selectedVideo}
-					frameBorder="0"></iframe>
+					frameBorder="0"></StyledIframe>
 			<ButtonSwitchWrapper>
 				<OnCircle />
 				<StyledSwitch src={Switch} width={isMobile ? '50px' : '90px'}/>
